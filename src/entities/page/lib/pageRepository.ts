@@ -1,8 +1,8 @@
-import type { Page } from '@/entities/page/model/types';
+import type { EditorContent, EditorType, Page } from '@/entities/page/model/types';
 
 const STORAGE_KEY = 'notion-editor-pages';
 
-type PageUpdate = Partial<Pick<Page, 'title' | 'content'>>;
+type PageUpdate = Partial<Pick<Page, 'title'>>;
 
 const readPages = (): Page[] => {
   const value = localStorage.getItem(STORAGE_KEY);
@@ -63,6 +63,32 @@ export const pageRepository = {
     const updatedPage: Page = {
       ...pages[index],
       ...patch,
+      updatedAt: new Date().toISOString(),
+    };
+
+    pages[index] = updatedPage;
+
+    writePages(pages);
+
+    return updatedPage;
+  },
+
+  updateEditorContent(id: string, editorType: EditorType, content: EditorContent): Page | null {
+    const pages = readPages();
+    const index = pages.findIndex((page) => page.id === id);
+
+    if (index === -1) {
+      return null;
+    }
+
+    const page = pages[index];
+
+    const updatedPage: Page = {
+      ...page,
+      content: {
+        ...page.content,
+        [editorType]: content,
+      },
       updatedAt: new Date().toISOString(),
     };
 
