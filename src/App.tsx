@@ -1,9 +1,5 @@
-import { Test } from '@/components/Test';
-
-import './App.css';
-
 function App() {
-  return <Test />;
+  return <div>Notion Editor PoC</div>;
 }
 
 export default App;
