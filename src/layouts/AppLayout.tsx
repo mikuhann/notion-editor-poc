@@ -1,15 +1,22 @@
 import { Outlet } from 'react-router-dom';
 
+import { Header } from '@/components/layout/Header';
+import { Sidebar } from '@/components/layout/Sidebar';
+
 export const AppLayout = () => {
   return (
-    <div className="min-h-screen bg-white text-neutral-900">
-      <header className="border-b border-neutral-200 px-6 py-4">
-        <span className="font-semibold">Notion Editor PoC</span>
-      </header>
+    <div className="flex min-h-screen bg-white text-neutral-900">
+      <Sidebar />
 
-      <main>
-        <Outlet />
-      </main>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Header />
+
+        <main className="flex-1">
+          <div className="mx-auto w-full max-w-5xl px-8 py-8">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
