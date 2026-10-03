@@ -11,11 +11,11 @@ const getLinkClassName = ({ isActive }: { isActive: boolean }) =>
 export const EditorSwitcher = () => {
   return (
     <nav className="flex items-center gap-1 rounded-lg bg-neutral-100 p-1">
-      <NavLink to="/tiptap" className={getLinkClassName}>
+      <NavLink to="/tiptap/pages" className={getLinkClassName}>
         Tiptap
       </NavLink>
 
-      <NavLink to="/lexical" className={getLinkClassName}>
+      <NavLink to="/lexical/pages" className={getLinkClassName}>
         Lexical
       </NavLink>
     </nav>

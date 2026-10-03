@@ -10,14 +10,14 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/tiptap" replace />,
+        element: <Navigate to="/tiptap/pages" replace />,
       },
       {
-        path: 'tiptap',
+        path: 'tiptap/pages',
         element: <TiptapPage />,
       },
       {
-        path: 'lexical',
+        path: 'lexical/pages',
         element: <LexicalPage />,
       },
     ],
