@@ -18,7 +18,7 @@ export const LexicalPage = () => {
 
   return (
     <div>
-      <PageTitle key={page.id} page={page} />
+      <PageTitle key={`title-${page.id}`} page={page} />
 
       <div className="mt-6 text-sm text-neutral-500">Lexical editor will be here</div>
     </div>
