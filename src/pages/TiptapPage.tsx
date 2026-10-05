@@ -1,6 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 
 import { pageRepository } from '@/entities/page';
+import { PageTitle } from '@/components/page/PageTitle';
 
 export const TiptapPage = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export const TiptapPage = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold">{page.title}</h1>
+      <PageTitle page={page} />
 
       <div className="mt-6 text-sm text-neutral-500">Tiptap editor will be here</div>
     </div>
