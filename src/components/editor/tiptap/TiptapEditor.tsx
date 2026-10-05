@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 
 import { pageRepository, type EditorContent as StoredEditorContent } from '@/entities/page';
 import { TiptapToolbar } from './TiptapToolbar';
+import { SlashCommand } from './slash/SlashCommand';
 
 type TiptapEditorProps = {
   pageId: string;
@@ -14,7 +15,7 @@ export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingContentRef = useRef<StoredEditorContent>(null);
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, SlashCommand],
 
     content: content ?? {
       type: 'doc',
