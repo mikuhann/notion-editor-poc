@@ -79,4 +79,23 @@ export const slashCommandItems: SlashCommandItem[] = [
         .run();
     },
   },
+  {
+    title: 'Image',
+    keywords: ['image', 'picture', 'photo'],
+    command: (editor, range) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertContent({
+          type: 'imageBlock',
+          attrs: {
+            src: '',
+            alt: '',
+            caption: '',
+          },
+        })
+        .run();
+    },
+  },
 ];
