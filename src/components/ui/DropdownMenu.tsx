@@ -5,6 +5,9 @@ type DropdownMenuProps = {
   trigger: ReactNode;
   children: ReactNode;
   align?: 'start' | 'center' | 'end';
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  portalContainer?: HTMLElement | null;
 };
 
 type DropdownMenuItemProps = {
@@ -12,12 +15,19 @@ type DropdownMenuItemProps = {
   onSelect?: () => void;
 };
 
-export const DropdownMenu = ({ trigger, children, align = 'start' }: DropdownMenuProps) => {
+export const DropdownMenu = ({
+  trigger,
+  children,
+  align = 'start',
+  open,
+  onOpenChange,
+  portalContainer,
+}: DropdownMenuProps) => {
   return (
-    <RadixDropdownMenu.Root>
+    <RadixDropdownMenu.Root open={open} onOpenChange={onOpenChange}>
       <RadixDropdownMenu.Trigger asChild>{trigger}</RadixDropdownMenu.Trigger>
 
-      <RadixDropdownMenu.Portal>
+      <RadixDropdownMenu.Portal container={portalContainer ?? undefined}>
         <RadixDropdownMenu.Content
           align={align}
           sideOffset={6}
