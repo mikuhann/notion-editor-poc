@@ -61,4 +61,22 @@ export const slashCommandItems: SlashCommandItem[] = [
       editor.chain().focus().deleteRange(range).toggleBlockquote().run();
     },
   },
+  {
+    title: 'Button',
+    keywords: ['button', 'cta', 'link'],
+    command: (editor, range) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertContent({
+          type: 'buttonBlock',
+          attrs: {
+            label: 'Button',
+            href: '',
+          },
+        })
+        .run();
+    },
+  },
 ];
