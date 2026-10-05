@@ -1,5 +1,19 @@
 import { NodeViewWrapper, type NodeViewProps } from '@tiptap/react';
 
+const normalizeHref = (value: string) => {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return '';
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  return `https://${trimmed}`;
+};
+
 export const ButtonBlockView = ({ node, updateAttributes, selected }: NodeViewProps) => {
   const label = node.attrs.label as string;
   const href = node.attrs.href as string;
@@ -22,22 +36,23 @@ export const ButtonBlockView = ({ node, updateAttributes, selected }: NodeViewPr
         <input
           value={href}
           onChange={(event) => updateAttributes({ href: event.target.value })}
+          onBlur={() => {
+            const normalizedHref = normalizeHref(href);
+
+            if (normalizedHref !== href) {
+              updateAttributes({ href: normalizedHref });
+            }
+          }}
           placeholder="https://example.com"
           className="rounded border border-neutral-200 px-3 py-2 outline-none"
         />
 
         <div>
-          <a
-            href={href || undefined}
-            onClick={(event) => {
-              if (!href) {
-                event.preventDefault();
-              }
-            }}
-            className="inline-flex rounded-md bg-neutral-300 px-4 py-2 text-sm text-neutral-900 no-underline hover:bg-neutral-200"
-          >
-            {label || 'Button'}
-          </a>
+          <div>
+            <span className="inline-flex cursor-default rounded-md bg-neutral-300 px-4 py-2 text-sm text-neutral-900">
+              {label || 'Button'}
+            </span>
+          </div>
         </div>
       </div>
     </NodeViewWrapper>
