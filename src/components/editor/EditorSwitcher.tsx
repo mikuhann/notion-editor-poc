@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const getLinkClassName = ({ isActive }: { isActive: boolean }) =>
   [
@@ -9,13 +9,19 @@ const getLinkClassName = ({ isActive }: { isActive: boolean }) =>
   ].join(' ');
 
 export const EditorSwitcher = () => {
+  const { pathname } = useLocation();
+
+  const currentPath = pathname.replace(/^\/(tiptap|lexical)/, '');
+
+  const getEditorPath = (editor: 'tiptap' | 'lexical') => `/${editor}${currentPath || '/pages'}`;
+
   return (
     <nav className="flex items-center gap-1 rounded-lg bg-neutral-100 p-1">
-      <NavLink to="/tiptap/pages" className={getLinkClassName}>
+      <NavLink to={getEditorPath('tiptap')} className={getLinkClassName}>
         Tiptap
       </NavLink>
 
-      <NavLink to="/lexical/pages" className={getLinkClassName}>
+      <NavLink to={getEditorPath('lexical')} className={getLinkClassName}>
         Lexical
       </NavLink>
     </nav>

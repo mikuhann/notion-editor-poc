@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { MainPage } from '@/pages/MainPage';
+import { TiptapPage } from '@/pages/TiptapPage';
+import { LexicalPage } from '@/pages/LexicalPage';
 
 import { AppLayout } from '@/layouts/AppLayout';
-import { LexicalPage } from '@/pages/LexicalPage';
-import { TiptapPage } from '@/pages/TiptapPage';
 
 export const router = createBrowserRouter([
   {
@@ -14,10 +15,18 @@ export const router = createBrowserRouter([
       },
       {
         path: 'tiptap/pages',
+        element: <MainPage editorType="tiptap" />,
+      },
+      {
+        path: 'tiptap/pages/:id',
         element: <TiptapPage />,
       },
       {
         path: 'lexical/pages',
+        element: <MainPage editorType="lexical" />,
+      },
+      {
+        path: 'lexical/pages/:id',
         element: <LexicalPage />,
       },
     ],
