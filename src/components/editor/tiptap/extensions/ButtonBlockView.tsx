@@ -14,6 +14,8 @@ const normalizeHref = (value: string) => {
   return `https://${trimmed}`;
 };
 
+const buttonClassName = 'inline-flex rounded-md bg-neutral-300 px-4 py-2 text-sm text-neutral-900';
+
 export const ButtonBlockView = ({ node, updateAttributes, selected, editor }: NodeViewProps) => {
   const label = node.attrs.label as string;
   const href = node.attrs.href as string;
@@ -22,10 +24,7 @@ export const ButtonBlockView = ({ node, updateAttributes, selected, editor }: No
   if (!isEditable) {
     return (
       <NodeViewWrapper className="my-3" contentEditable={false}>
-        <a
-          href={href}
-          className="inline-flex rounded-md bg-neutral-900 px-4 py-2 text-sm text-white"
-        >
+        <a href={href} className={buttonClassName}>
           {label || 'Button'}
         </a>
       </NodeViewWrapper>
@@ -63,9 +62,7 @@ export const ButtonBlockView = ({ node, updateAttributes, selected, editor }: No
 
         <div>
           <div>
-            <span className="inline-flex cursor-default rounded-md bg-neutral-300 px-4 py-2 text-sm text-neutral-900">
-              {label || 'Button'}
-            </span>
+            <span className={buttonClassName}>{label || 'Button'}</span>
           </div>
         </div>
       </div>
