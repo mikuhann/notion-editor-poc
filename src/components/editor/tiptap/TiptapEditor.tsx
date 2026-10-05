@@ -3,6 +3,7 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 import { pageRepository, type EditorContent as StoredEditorContent } from '@/entities/page';
+import { TiptapToolbar } from './TiptapToolbar';
 
 type TiptapEditorProps = {
   pageId: string;
@@ -62,6 +63,8 @@ export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
 
   return (
     <div className="mt-6 rounded-lg border border-neutral-200">
+      {editor && <TiptapToolbar editor={editor} />}
+
       <EditorContent editor={editor} />
     </div>
   );
