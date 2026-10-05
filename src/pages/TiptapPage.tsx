@@ -18,7 +18,7 @@ export const TiptapPage = () => {
 
   return (
     <div>
-      <PageTitle page={page} />
+      <PageTitle key={page.id} page={page} />
 
       <div className="mt-6 text-sm text-neutral-500">Tiptap editor will be here</div>
     </div>
