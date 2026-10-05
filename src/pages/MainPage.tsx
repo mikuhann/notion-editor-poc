@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Trash2 } from 'lucide-react';
 
-import { pageRepository, type EditorType, type Page } from '@/entities/page';
+import { pageRepository, usePages, type EditorType } from '@/entities/page';
 import { Button } from '@/components/ui';
 
 type MainPageProps = {
@@ -9,11 +9,14 @@ type MainPageProps = {
 };
 
 export const MainPage = ({ editorType }: MainPageProps) => {
-  const [pages, setPages] = useState<Page[]>(() => pageRepository.getPages());
+  const pages = usePages();
 
   const handleCreatePage = () => {
     pageRepository.createPage();
-    setPages(pageRepository.getPages());
+  };
+
+  const handleDeletePage = (id: string) => {
+    pageRepository.deletePage(id);
   };
 
   return (
@@ -36,17 +39,28 @@ export const MainPage = ({ editorType }: MainPageProps) => {
       ) : (
         <div className="space-y-2">
           {pages.map((page) => (
-            <Link
+            <div
               key={page.id}
-              to={`/${editorType}/pages/${page.id}`}
-              className="block rounded-lg border border-neutral-200 px-4 py-3 transition-colors hover:bg-neutral-50"
+              className="flex items-center rounded-lg border border-neutral-200 transition-colors hover:bg-neutral-50"
             >
-              <div className="font-medium">{page.title}</div>
+              <Link to={`/${editorType}/pages/${page.id}`} className="min-w-0 flex-1 px-4 py-3">
+                <div className="font-medium">{page.title}</div>
 
-              <div className="mt-1 text-xs text-neutral-500">
-                Updated {new Date(page.updatedAt).toLocaleString()}
-              </div>
-            </Link>
+                <div className="mt-1 text-xs text-neutral-500">
+                  Updated {new Date(page.updatedAt).toLocaleString()}
+                </div>
+              </Link>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDeletePage(page.id)}
+                aria-label={`Delete ${page.title}`}
+                className="mr-2"
+              >
+                <Trash2 size={16} />
+              </Button>
+            </div>
           ))}
         </div>
       )}

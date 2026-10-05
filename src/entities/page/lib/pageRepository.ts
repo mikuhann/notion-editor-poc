@@ -1,6 +1,7 @@
 import type { EditorContent, EditorType, Page } from '@/entities/page/model/types';
 
 const STORAGE_KEY = 'notion-editor-pages';
+const STORAGE_EVENT = 'notion-editor-pages-change';
 
 type PageUpdate = Partial<Pick<Page, 'title'>>;
 
@@ -20,6 +21,7 @@ const readPages = (): Page[] => {
 
 const writePages = (pages: Page[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(pages));
+  window.dispatchEvent(new Event(STORAGE_EVENT));
 };
 
 export const pageRepository = {
@@ -110,5 +112,13 @@ export const pageRepository = {
     writePages(nextPages);
 
     return true;
+  },
+
+  subscribe(callback: () => void) {
+    window.addEventListener(STORAGE_EVENT, callback);
+
+    return () => {
+      window.removeEventListener(STORAGE_EVENT, callback);
+    };
   },
 };
