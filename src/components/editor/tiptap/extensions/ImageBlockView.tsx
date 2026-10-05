@@ -1,9 +1,26 @@
 import { NodeViewWrapper, type NodeViewProps } from '@tiptap/react';
 
-export const ImageBlockView = ({ node, updateAttributes, selected }: NodeViewProps) => {
+export const ImageBlockView = ({ node, updateAttributes, selected, editor }: NodeViewProps) => {
   const src = node.attrs.src as string;
   const alt = node.attrs.alt as string;
   const caption = node.attrs.caption as string;
+  const isEditable = editor.isEditable;
+
+  if (!isEditable) {
+    return (
+      <NodeViewWrapper className="my-4" contentEditable={false}>
+        {src && (
+          <figure>
+            <img src={src} alt={alt} className="max-h-96 max-w-full rounded object-contain" />
+
+            {caption && (
+              <figcaption className="mt-2 text-sm text-neutral-500">{caption}</figcaption>
+            )}
+          </figure>
+        )}
+      </NodeViewWrapper>
+    );
+  }
 
   return (
     <NodeViewWrapper

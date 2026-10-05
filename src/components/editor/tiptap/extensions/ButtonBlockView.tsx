@@ -14,9 +14,23 @@ const normalizeHref = (value: string) => {
   return `https://${trimmed}`;
 };
 
-export const ButtonBlockView = ({ node, updateAttributes, selected }: NodeViewProps) => {
+export const ButtonBlockView = ({ node, updateAttributes, selected, editor }: NodeViewProps) => {
   const label = node.attrs.label as string;
   const href = node.attrs.href as string;
+  const isEditable = editor.isEditable;
+
+  if (!isEditable) {
+    return (
+      <NodeViewWrapper className="my-3" contentEditable={false}>
+        <a
+          href={href}
+          className="inline-flex rounded-md bg-neutral-900 px-4 py-2 text-sm text-white"
+        >
+          {label || 'Button'}
+        </a>
+      </NodeViewWrapper>
+    );
+  }
 
   return (
     <NodeViewWrapper
