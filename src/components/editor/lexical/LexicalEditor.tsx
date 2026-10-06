@@ -1,28 +1,33 @@
-import { $createParagraphNode, $getRoot } from 'lexical';
-import { defineExtension } from '@lexical/extension';
+import { useMemo } from 'react';
+import { defineExtension } from 'lexical';
 import { HistoryExtension } from '@lexical/history';
 import { RichTextExtension } from '@lexical/rich-text';
 import { LexicalExtensionComposer } from '@lexical/react/LexicalExtensionComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 
-const lexicalExtension = defineExtension({
-  name: 'NotionLexicalEditor',
-  namespace: 'NotionLexicalEditor',
+import type { EditorContent as StoredEditorContent } from '@/entities/page';
 
-  dependencies: [RichTextExtension, HistoryExtension],
+type LexicalEditorProps = {
+  pageId: string;
+  content: StoredEditorContent;
+};
 
-  $initialEditorState() {
-    const root = $getRoot();
+export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
+  const lexicalExtension = useMemo(
+    () =>
+      defineExtension({
+        name: 'NotionLexicalEditor',
+        namespace: `NotionLexicalEditor:${pageId}`,
 
-    if (root.isEmpty()) {
-      root.append($createParagraphNode());
-    }
-  },
-});
+        dependencies: [RichTextExtension, HistoryExtension],
 
-export const LexicalEditor = () => {
+        $initialEditorState: content ? JSON.stringify(content) : undefined,
+      }),
+    [pageId, content],
+  );
+
   return (
-    <div className="mt-6 rounded-lg border border-neutral-200">
+    <div className="relative mt-6 rounded-lg border border-neutral-200">
       <LexicalExtensionComposer
         extension={lexicalExtension}
         contentEditable={<ContentEditable className="min-h-64 p-4 outline-none" />}

@@ -21,9 +21,7 @@ export const LexicalPage = () => {
     <div>
       <PageTitle key={`title-${page.id}`} page={page} />
 
-      <div className="relative mt-6 rounded-lg border border-neutral-200">
-        <LexicalEditor />
-      </div>
+      <LexicalEditor pageId={`editor-${page.id}`} content={page.content.lexical} />
     </div>
   );
 };
