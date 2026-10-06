@@ -43,7 +43,8 @@ export const LexicalToolbar = () => {
           setIsItalic(false);
           setIsUnderline(false);
           setIsStrike(false);
-
+          setIsLink(false);
+          setLinkHref(undefined);
           return;
         }
 

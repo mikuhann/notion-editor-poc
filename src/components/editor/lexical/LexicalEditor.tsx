@@ -10,6 +10,7 @@ import { ListExtension } from '@lexical/list';
 import type { EditorContent as StoredEditorContent } from '@/entities/page';
 import { LexicalPersistenceExtension } from './extensions/LexicalPersistenceExtension';
 import { LexicalToolbar } from './LexicalToolbar';
+import { LexicalSlashMenu } from './slash/LexicalSlashMenu';
 
 type LexicalEditorProps = {
   pageId: string;
@@ -24,6 +25,14 @@ const lexicalTheme = {
   },
 
   link: 'cursor-pointer text-blue-600 underline',
+
+  list: {
+    ul: 'list-disc pl-6',
+    ol: 'list-decimal pl-6',
+    listitem: 'my-1',
+  },
+
+  quote: 'border-l-4 border-neutral-300 pl-4 italic text-neutral-600',
 
   text: {
     bold: 'font-bold',
@@ -61,6 +70,7 @@ export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
     <div className="relative mt-6 rounded-lg border border-neutral-200">
       <LexicalExtensionComposer extension={lexicalExtension} contentEditable={null}>
         <LexicalToolbar />
+        <LexicalSlashMenu />
 
         <ContentEditable className="min-h-64 p-4 outline-none" />
       </LexicalExtensionComposer>
