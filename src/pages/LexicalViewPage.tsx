@@ -19,14 +19,6 @@ export const LexicalViewPage = () => {
   return (
     <div>
       <div className="mb-8 flex items-start justify-between gap-4">
-        <div className="mb-4 flex justify-end">
-          <Link
-            to={`/lexical/pages/${page.id}`}
-            className="rounded-md border border-neutral-200 px-4 py-2 text-sm hover:bg-neutral-50"
-          >
-            View
-          </Link>
-        </div>
         <h1 className="text-4xl font-bold">{page.title}</h1>
 
         <Link
