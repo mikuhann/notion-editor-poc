@@ -2,6 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { pageRepository } from '@/entities/page';
 import { PageTitle } from '@/components/page/PageTitle';
+import { LexicalEditor } from '@/components/editor/lexical/LexicalEditor';
 
 export const LexicalPage = () => {
   const { id } = useParams();
@@ -20,7 +21,9 @@ export const LexicalPage = () => {
     <div>
       <PageTitle key={`title-${page.id}`} page={page} />
 
-      <div className="mt-6 text-sm text-neutral-500">Lexical editor will be here</div>
+      <div className="relative mt-6 rounded-lg border border-neutral-200">
+        <LexicalEditor />
+      </div>
     </div>
   );
 };

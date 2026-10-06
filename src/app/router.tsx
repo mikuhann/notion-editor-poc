@@ -34,6 +34,10 @@ export const router = createBrowserRouter([
         path: 'lexical/pages/:id',
         element: <LexicalPage />,
       },
+      {
+        path: 'lexical/pages/:id/edit',
+        element: <LexicalPage />,
+      },
     ],
   },
 ]);
