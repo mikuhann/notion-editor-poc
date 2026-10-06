@@ -152,77 +152,73 @@ export const LexicalToolbar = () => {
             left: position.left,
           }}
         >
-          <div className="flex items-center gap-1 border-b border-neutral-200 p-1">
-            <DropdownMenu
-              open={isBlockMenuOpen}
-              onOpenChange={setIsBlockMenuOpen}
-              trigger={
-                <Button variant="ghost" size="sm" className="w-20 justify-between">
-                  {blockType}
-                  <ChevronDown size={14} />
-                </Button>
-              }
-            >
-              <DropdownMenuItem onSelect={() => changeBlockType('paragraph')}>
-                Text
-              </DropdownMenuItem>
+          <DropdownMenu
+            open={isBlockMenuOpen}
+            onOpenChange={setIsBlockMenuOpen}
+            trigger={
+              <Button variant="ghost" size="sm" className="w-20 justify-between">
+                {blockType}
+                <ChevronDown size={14} />
+              </Button>
+            }
+          >
+            <DropdownMenuItem onSelect={() => changeBlockType('paragraph')}>Text</DropdownMenuItem>
 
-              <DropdownMenuItem onSelect={() => changeBlockType('h1')}>Heading 1</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => changeBlockType('h1')}>Heading 1</DropdownMenuItem>
 
-              <DropdownMenuItem onSelect={() => changeBlockType('h2')}>Heading 2</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => changeBlockType('h2')}>Heading 2</DropdownMenuItem>
 
-              <DropdownMenuItem onSelect={() => changeBlockType('h3')}>Heading 3</DropdownMenuItem>
-            </DropdownMenu>
+            <DropdownMenuItem onSelect={() => changeBlockType('h3')}>Heading 3</DropdownMenuItem>
+          </DropdownMenu>
 
-            <IconButton
-              icon={<Bold size={16} />}
-              label="Bold"
-              aria-pressed={isBold}
-              className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
-            />
+          <IconButton
+            icon={<Bold size={16} />}
+            label="Bold"
+            aria-pressed={isBold}
+            className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
+          />
 
-            <IconButton
-              icon={<Italic size={16} />}
-              label="Italic"
-              aria-pressed={isItalic}
-              className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
-            />
+          <IconButton
+            icon={<Italic size={16} />}
+            label="Italic"
+            aria-pressed={isItalic}
+            className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
+          />
 
-            <IconButton
-              icon={<Underline size={16} />}
-              label="Underline"
-              aria-pressed={isUnderline}
-              className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
-            />
+          <IconButton
+            icon={<Underline size={16} />}
+            label="Underline"
+            aria-pressed={isUnderline}
+            className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
+          />
 
-            <IconButton
-              icon={<Strikethrough size={16} />}
-              label="Strike"
-              aria-pressed={isStrike}
-              className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
-            />
+          <IconButton
+            icon={<Strikethrough size={16} />}
+            label="Strike"
+            aria-pressed={isStrike}
+            className="aria-pressed:bg-neutral-200 aria-pressed:text-neutral-950"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
+          />
 
-            <LinkPopover
-              open={isLinkPopoverOpen}
-              active={isLink}
-              initialUrl={linkHref}
-              onOpenChange={setIsLinkPopoverOpen}
-              onApply={(url) => {
-                editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
-              }}
-              onRemove={() => {
-                editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-              }}
-            />
-          </div>
+          <LinkPopover
+            open={isLinkPopoverOpen}
+            active={isLink}
+            initialUrl={linkHref}
+            onOpenChange={setIsLinkPopoverOpen}
+            onApply={(url) => {
+              editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
+            }}
+            onRemove={() => {
+              editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+            }}
+          />
         </div>
       )}
     </>
