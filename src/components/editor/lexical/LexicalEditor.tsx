@@ -18,7 +18,7 @@ export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
     () =>
       defineExtension({
         name: 'NotionLexicalEditor',
-        namespace: `NotionLexicalEditor:${pageId}`,
+        namespace: 'NotionLexicalEditor',
 
         dependencies: [
           RichTextExtension,
