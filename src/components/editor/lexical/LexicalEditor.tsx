@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
-import { defineExtension } from 'lexical';
+import { defineExtension, configExtension } from 'lexical';
 import { HistoryExtension } from '@lexical/history';
 import { RichTextExtension } from '@lexical/rich-text';
 import { LexicalExtensionComposer } from '@lexical/react/LexicalExtensionComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 
 import type { EditorContent as StoredEditorContent } from '@/entities/page';
+import { LexicalPersistenceExtension } from './extensions/LexicalPersistenceExtension';
 
 type LexicalEditorProps = {
   pageId: string;
-  content: StoredEditorContent;
+  content: StoredEditorContent<'lexical'>;
 };
 
 export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
@@ -19,7 +20,13 @@ export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
         name: 'NotionLexicalEditor',
         namespace: `NotionLexicalEditor:${pageId}`,
 
-        dependencies: [RichTextExtension, HistoryExtension],
+        dependencies: [
+          RichTextExtension,
+          HistoryExtension,
+          configExtension(LexicalPersistenceExtension, {
+            pageId,
+          }),
+        ],
 
         $initialEditorState: content ? JSON.stringify(content) : undefined,
       }),

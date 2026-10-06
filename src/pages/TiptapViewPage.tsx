@@ -29,7 +29,7 @@ export const TiptapViewPage = () => {
         </Link>
       </div>
 
-      <TiptapRenderer content={page.content.tiptap} />
+      <TiptapRenderer key={`renderer-${page.id}`} content={page.content.tiptap} />
     </div>
   );
 };

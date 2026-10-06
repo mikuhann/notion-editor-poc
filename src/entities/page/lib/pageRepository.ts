@@ -75,7 +75,11 @@ export const pageRepository = {
     return updatedPage;
   },
 
-  updateEditorContent(id: string, editorType: EditorType, content: EditorContent): Page | null {
+  updateEditorContent<T extends EditorType>(
+    id: string,
+    editorType: T,
+    content: EditorContent<T>,
+  ): Page | null {
     const pages = readPages();
     const index = pages.findIndex((page) => page.id === id);
 

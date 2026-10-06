@@ -7,7 +7,7 @@ import { ButtonBlock } from './extensions/ButtonBlock';
 import { ImageBlock } from './extensions/ImageBlock';
 
 type TiptapRendererProps = {
-  content: StoredEditorContent;
+  content: StoredEditorContent<'tiptap'>;
 };
 
 export const TiptapRenderer = ({ content }: TiptapRendererProps) => {

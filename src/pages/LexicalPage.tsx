@@ -21,7 +21,7 @@ export const LexicalPage = () => {
     <div>
       <PageTitle key={`title-${page.id}`} page={page} />
 
-      <LexicalEditor pageId={`editor-${page.id}`} content={page.content.lexical} />
+      <LexicalEditor key={`editor-${page.id}`} pageId={page.id} content={page.content.lexical} />
     </div>
   );
 };

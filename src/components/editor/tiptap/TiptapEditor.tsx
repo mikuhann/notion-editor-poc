@@ -10,12 +10,12 @@ import { ImageBlock } from './extensions/ImageBlock';
 
 type TiptapEditorProps = {
   pageId: string;
-  content: StoredEditorContent;
+  content: StoredEditorContent<'tiptap'>;
 };
 
 export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pendingContentRef = useRef<StoredEditorContent>(null);
+  const pendingContentRef = useRef<StoredEditorContent<'tiptap'>>(null);
   const editor = useEditor({
     extensions: [StarterKit, SlashCommand, ButtonBlock, ImageBlock],
 
