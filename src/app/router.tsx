@@ -3,6 +3,7 @@ import { MainPage } from '@/pages/MainPage';
 import { TiptapPage } from '@/pages/TiptapPage';
 import { LexicalPage } from '@/pages/LexicalPage';
 import { TiptapViewPage } from '@/pages/TiptapViewPage';
+import { LexicalViewPage } from '@/pages/LexicalViewPage';
 
 import { AppLayout } from '@/layouts/AppLayout';
 
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'lexical/pages/:id',
-        element: <LexicalPage />,
+        element: <LexicalViewPage />,
       },
       {
         path: 'lexical/pages/:id/edit',

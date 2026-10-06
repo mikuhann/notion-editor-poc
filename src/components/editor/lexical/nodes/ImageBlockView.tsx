@@ -2,6 +2,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { $getNodeByKey, type NodeKey } from 'lexical';
 
 import { $isImageBlockNode } from './ImageBlockNode';
+import { useLexicalEditable } from '@lexical/react/useLexicalEditable';
 
 type ImageBlockViewProps = {
   nodeKey: NodeKey;
@@ -12,6 +13,7 @@ type ImageBlockViewProps = {
 
 export const ImageBlockView = ({ nodeKey, src, alt, caption }: ImageBlockViewProps) => {
   const [editor] = useLexicalComposerContext();
+  const isEditable = useLexicalEditable();
 
   const updateAttributes = (attributes: { src?: string; alt?: string; caption?: string }) => {
     editor.update(() => {
@@ -34,6 +36,22 @@ export const ImageBlockView = ({ nodeKey, src, alt, caption }: ImageBlockViewPro
       }
     });
   };
+
+  if (!isEditable) {
+    return (
+      <div className="my-4">
+        {src && (
+          <figure>
+            <img src={src} alt={alt} className="max-h-96 max-w-full rounded object-contain" />
+
+            {caption && (
+              <figcaption className="mt-2 text-sm text-neutral-500">{caption}</figcaption>
+            )}
+          </figure>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="my-3 rounded-lg border border-neutral-200 p-3">

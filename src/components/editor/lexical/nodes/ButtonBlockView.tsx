@@ -2,6 +2,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { $getNodeByKey, type NodeKey } from 'lexical';
 
 import { $isButtonBlockNode } from './ButtonBlockNode';
+import { useLexicalEditable } from '@lexical/react/useLexicalEditable';
 
 type ButtonBlockViewProps = {
   nodeKey: NodeKey;
@@ -27,6 +28,7 @@ const buttonClassName = 'inline-flex rounded-md bg-neutral-300 px-4 py-2 text-sm
 
 export const ButtonBlockView = ({ nodeKey, label, href }: ButtonBlockViewProps) => {
   const [editor] = useLexicalComposerContext();
+  const isEditable = useLexicalEditable();
 
   const updateAttributes = (attributes: { label?: string; href?: string }) => {
     editor.update(() => {
@@ -45,6 +47,16 @@ export const ButtonBlockView = ({ nodeKey, label, href }: ButtonBlockViewProps) 
       }
     });
   };
+
+  if (!isEditable) {
+    return (
+      <div className="my-3">
+        <a href={href} className={buttonClassName}>
+          {label || 'Button'}
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="my-3 rounded-lg border border-neutral-200 p-3">
