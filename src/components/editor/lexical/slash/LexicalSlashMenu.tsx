@@ -11,6 +11,8 @@ import { $setBlocksType } from '@lexical/selection';
 import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 
 import { LexicalSlashCommandOption } from './LexicalSlashCommandOption';
+import { $createButtonBlockNode } from '../nodes/ButtonBlockNode';
+import { $createImageBlockNode } from '../nodes/ImageBlockNode';
 
 export const LexicalSlashMenu = () => {
   const [editor] = useLexicalComposerContext();
@@ -73,6 +75,28 @@ export const LexicalSlashMenu = () => {
         if ($isRangeSelection(selection)) {
           $setBlocksType(selection, () => $createQuoteNode());
         }
+      }),
+
+      new LexicalSlashCommandOption('Button', ['button', 'link', 'cta'], () => {
+        const selection = $getSelection();
+
+        if (!$isRangeSelection(selection)) {
+          return;
+        }
+
+        const node = $createButtonBlockNode();
+
+        selection.insertNodes([node]);
+      }),
+
+      new LexicalSlashCommandOption('Image', ['image', 'picture', 'photo'], () => {
+        const selection = $getSelection();
+
+        if (!$isRangeSelection(selection)) {
+          return;
+        }
+
+        selection.insertNodes([$createImageBlockNode()]);
       }),
     ],
     [],

@@ -11,6 +11,8 @@ import type { EditorContent as StoredEditorContent } from '@/entities/page';
 import { LexicalPersistenceExtension } from './extensions/LexicalPersistenceExtension';
 import { LexicalToolbar } from './LexicalToolbar';
 import { LexicalSlashMenu } from './slash/LexicalSlashMenu';
+import { ButtonBlockNode } from './nodes/ButtonBlockNode';
+import { ImageBlockNode } from './nodes/ImageBlockNode';
 
 type LexicalEditorProps = {
   pageId: string;
@@ -50,6 +52,7 @@ export const LexicalEditor = ({ pageId, content }: LexicalEditorProps) => {
         name: 'NotionLexicalEditor',
         namespace: 'NotionLexicalEditor',
         theme: lexicalTheme,
+        nodes: () => [ButtonBlockNode, ImageBlockNode],
 
         dependencies: [
           RichTextExtension,
