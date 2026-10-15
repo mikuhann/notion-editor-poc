@@ -24,9 +24,13 @@ export const ButtonBlockView = ({ node, updateAttributes, selected, editor }: No
   if (!isEditable) {
     return (
       <NodeViewWrapper className="my-3" contentEditable={false}>
-        <a href={href} className={buttonClassName}>
-          {label || 'Button'}
-        </a>
+        {href.trim() ? (
+          <a href={href} target="_blank" rel="noopener noreferrer" className={buttonClassName}>
+            {label || 'Button'}
+          </a>
+        ) : (
+          <span className={buttonClassName}>{label || 'Button'}</span>
+        )}
       </NodeViewWrapper>
     );
   }

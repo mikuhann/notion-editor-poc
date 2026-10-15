@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
 
 import { pageRepository, usePages, type EditorType } from '@/entities/page';
@@ -11,8 +11,12 @@ type MainPageProps = {
 export const MainPage = ({ editorType }: MainPageProps) => {
   const pages = usePages();
 
+  const navigate = useNavigate();
+
   const handleCreatePage = () => {
-    pageRepository.createPage();
+    const page = pageRepository.createPage();
+
+    navigate(`/${editorType}/pages/${page.id}/edit`);
   };
 
   const handleDeletePage = (id: string) => {

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Placeholder from '@tiptap/extension-placeholder';
 
 import { pageRepository, type EditorContent as StoredEditorContent } from '@/entities/page';
 import { TiptapToolbar } from './TiptapToolbar';
@@ -17,7 +18,15 @@ export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingContentRef = useRef<StoredEditorContent<'tiptap'>>(null);
   const editor = useEditor({
-    extensions: [StarterKit, SlashCommand, ButtonBlock, ImageBlock],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: 'Введите текст или нажмите "/" для выбора блока...',
+      }),
+      SlashCommand,
+      ButtonBlock,
+      ImageBlock,
+    ],
 
     content: content ?? {
       type: 'doc',
@@ -30,7 +39,7 @@ export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
 
     editorProps: {
       attributes: {
-        class: 'tiptap min-h-64 p-4 outline-none',
+        class: 'tiptap min-h-[50vh] outline-none',
       },
     },
 
@@ -65,7 +74,7 @@ export const TiptapEditor = ({ pageId, content }: TiptapEditorProps) => {
   }, [pageId]);
 
   return (
-    <div className="mt-6 rounded-lg border border-neutral-200">
+    <div className="mt-6">
       {editor && <TiptapToolbar editor={editor} />}
 
       <EditorContent editor={editor} />

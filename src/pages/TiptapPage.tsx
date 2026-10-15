@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { Eye } from 'lucide-react';
 
 import { pageRepository } from '@/entities/page';
 import { PageTitle } from '@/components/page/PageTitle';
@@ -18,13 +19,14 @@ export const TiptapPage = () => {
   }
 
   return (
-    <div>
+    <div className="mx-auto max-w-3xl pt-10">
       <div className="mb-4 flex justify-end">
         <Link
           to={`/tiptap/pages/${page.id}`}
-          className="rounded-md border border-neutral-200 px-4 py-2 text-sm hover:bg-neutral-50"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
         >
-          View
+          <Eye size={16} />
+          Предпросмотр
         </Link>
       </div>
 
